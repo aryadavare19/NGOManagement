@@ -86,7 +86,8 @@ class Donations {
             System.out.print("Enter new Contact Info: ");
             donation.contactInfo = scanner.nextLine();
             System.out.print("Enter new Amount Donated: ");
-            donation.amountDonated = scanner.nextDouble();
+            double amount = scanner.nextDouble();
+            donation.amountDonated+=amount;
             System.out.println("Donation updated successfully!");
         } else {
             System.out.println("Donation record not found for ID: " + donationId);
