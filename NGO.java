@@ -876,7 +876,7 @@ do{
                 }
             }while(choice2!=0);
             break;
-        case 3:
+      /*  case 3:
             int choice3=0;
             do {
                 System.out.println("\nNGO Resource Allocation System");
@@ -923,10 +923,10 @@ do{
                         System.out.println("Invalid choice.");
                 }
             }while (choice3!=0);
-            break;
+            break;   
         default:
             System.out.println("Enter valid choice");
-
+ */
 
     }
 }while(Mainchoice!=0);
