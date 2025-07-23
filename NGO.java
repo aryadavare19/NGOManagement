@@ -1,3 +1,5 @@
+package NGos;
+
 import java.util.*;
 import java.util.InputMismatchException;
 
@@ -18,7 +20,8 @@ class Donation {
     }
 
     public void displayDonationDetails() {
-        System.out.println("Donation ID: " + this.donationId + ", Name: " + this.nameOfDonar + ", Contact Info: " + this.contactInfo + ", Amount Donated: Rs" + this.amountDonated);
+        System.out.println("Donation ID: " + this.donationId + ", Name: " + this.nameOfDonar +
+                ", Contact: " + this.contactInfo + ", Amount: Rs " + this.amountDonated);
     }
 }
 
@@ -75,7 +78,7 @@ class Donations {
     }
 
     // Method to search and update donation by ID
-    public void updateDonation() {//update phoneNumber and amount donated
+    public void updateDonation() {  //update phoneNumber and amount donated
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Donor ID to update: ");
         int donationId = scanner.nextInt();
@@ -86,8 +89,7 @@ class Donations {
             System.out.print("Enter new Contact Info: ");
             donation.contactInfo = scanner.nextLine();
             System.out.print("Enter new Amount Donated: ");
-            double amount = scanner.nextDouble();
-            donation.amountDonated+=amount;
+            donation.amountDonated = scanner.nextDouble();
             System.out.println("Donation updated successfully!");
         } else {
             System.out.println("Donation record not found for ID: " + donationId);
@@ -163,6 +165,140 @@ class Donations {
         return total;
     }
 }
+//class Donations {
+//    private Donation head;
+//
+//    public void addDonation() {
+//        Scanner scanner = new Scanner(System.in);
+//        try {
+//            System.out.print("Enter Donor ID: ");
+//            int donationId = scanner.nextInt();
+//            scanner.nextLine();
+//            System.out.print("Enter Donor Name: ");
+//            String name = scanner.nextLine();
+//            System.out.print("Enter Contact Info: ");
+//            String contact = scanner.nextLine();
+//            System.out.print("Enter Amount Donated: ");
+//            double amount = scanner.nextDouble();
+//
+//            Donation newDonation = new Donation(donationId, name, contact, amount);
+//            newDonation.next = head;
+//            head = newDonation;
+//
+//            System.out.println("Donation added successfully.");
+//        } catch (InputMismatchException e) {
+//            System.out.println("Invalid input. Please enter correct data.");
+//            scanner.nextLine();
+//        }
+//    }
+//
+//    public void displayAllDonations() {
+//        if (head == null) {
+//            System.out.println("No donations recorded.");
+//            return;
+//        }
+//        Donation current = head;
+//        while (current != null) {
+//            current.displayDonationDetails();
+//            current = current.next;
+//        }
+//    }
+//
+//    public void updateDonationById() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Enter Donor ID to update: ");
+//        int id = scanner.nextInt();
+//        scanner.nextLine();
+//        Donation donation = searchDonation(id);
+//        if (donation != null) {
+//            System.out.print("Enter new Contact Info: ");
+//            donation.contactInfo = scanner.nextLine();
+//            System.out.print("Enter new Donation Amount: ");
+//            donation.amountDonated = scanner.nextDouble();
+//            System.out.println("Donation updated.");
+//        } else {
+//            System.out.println("Donation not found.");
+//        }
+//    }
+//
+//    public void displayDonationsById() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Enter Donor ID to search: ");
+//        int id = scanner.nextInt();
+//        Donation current = head;
+//        boolean found = false;
+//        while (current != null) {
+//            if (current.donationId == id) {
+//                current.displayDonationDetails();
+//                found = true;
+//            }
+//            current = current.next;
+//        }
+//        if (!found) System.out.println("No donations found for this ID.");
+//    }
+//
+//    private Donation searchDonation(int id) {
+//        Donation current = head;
+//        while (current != null) {
+//            if (current.donationId == id) return current;
+//            current = current.next;
+//        }
+//        return null;
+//    }
+//
+//    public double totalDonationAmount() {
+//        double total = 0;
+//        Donation current = head;
+//        while (current != null) {
+//            total += current.amountDonated;
+//            current = current.next;
+//        }
+//        return total;
+//    }
+//
+//    public void sortDonationsByAmount() {
+//        head = quickSort(head, null);
+//        System.out.println("Donations sorted by amount.");
+//    }
+//
+//    private Donation quickSort(Donation start, Donation end) {
+//        if (start == end || start == null || start.next == end)
+//            return start;
+//
+//        Donation[] parts = partition(start, end);
+//        Donation sortedStart = quickSort(parts[0], parts[1]);
+//        parts[2].next = quickSort(parts[3], end);
+//        return sortedStart;
+//    }
+//
+//    private Donation[] partition(Donation start, Donation end) {
+//        double pivot = start.amountDonated;
+//        Donation lessHead = new Donation(0, "", "", 0), lessTail = lessHead;
+//        Donation equalHead = start, equalTail = equalHead;
+//        Donation greaterHead = new Donation(0, "", "", 0), greaterTail = greaterHead;
+//        Donation current = start.next;
+//
+//        while (current != end) {
+//            if (current.amountDonated < pivot) {
+//                lessTail.next = current;
+//                lessTail = current;
+//            } else if (current.amountDonated == pivot) {
+//                equalTail.next = current;
+//                equalTail = current;
+//            } else {
+//                greaterTail.next = current;
+//                greaterTail = current;
+//            }
+//            current = current.next;
+//        }
+//
+//        lessTail.next = equalHead;
+//        equalTail.next = greaterHead.next;
+//        greaterTail.next = end;
+//
+//        return new Donation[]{lessHead.next, equalHead, equalTail, greaterHead.next};
+//    }
+//}
 // Volunteer class to represent each volunteer
 class Volunteer {
     int id;
@@ -596,13 +732,13 @@ class InventoryBST {
 
 // Represents a resource request with priority
 class Request {
-    int priority;
+    //int priority;
     String itemRequested;
     int quantity;
     String status;
 
-    public Request(int priority, String itemRequested, int quantity) {
-        this.priority = priority;
+    public Request( String itemRequested, int quantity) {
+        //this.priority = priority;
         this.itemRequested = itemRequested;
         this.quantity = quantity;
         this.status = "Pending";
@@ -610,26 +746,27 @@ class Request {
 
     @Override
     public String toString() {
-        return "Priority: " + priority + ", Item: " + itemRequested +
+        return   " Item: " + itemRequested +
                 ", Quantity: " + quantity + ", Status: " + status;
     }
 }
 
 // Manages requests, inventory, and beneficiary tracking
 class ResourceAllocation {
-    PriorityQueue<Request> requestQueue;
+    Queue<Request> requestQueue;
     InventoryBST inventoryBST;
     List<Beneficiary> beneficiaries;
 
     public ResourceAllocation(InventoryBST inventoryBST) {
         this.inventoryBST = inventoryBST;
         this.beneficiaries = new ArrayList<>();
-        this.requestQueue = new PriorityQueue<>(Comparator.comparingInt(r -> -r.priority));
+        this.requestQueue = new LinkedList<>();
+        //this.requestQueue = new PriorityQueue<>(Comparator.comparingInt(r -> -r.priority));
     }
 
     // Add request and handle stock adjustments
-    public void addRequest(int priority, String itemRequested, int quantity) {
-        Request request = new Request(priority, itemRequested, quantity);
+    public void addRequest( String itemRequested, int quantity) {
+        Request request = new Request( itemRequested, quantity);
         StockItem item = inventoryBST.search(itemRequested);
 
         if (item != null) {
@@ -665,7 +802,7 @@ class ResourceAllocation {
 
     // Fulfill pending requests based on the available stock
     public void fulfillPendingRequests() {
-        PriorityQueue<Request> remainingRequests = new PriorityQueue<>(Comparator.comparingInt(r -> -r.priority));
+        Queue<Request> remainingRequests = new LinkedList<>();
 
         while (!requestQueue.isEmpty()) {
             Request request = requestQueue.poll();
@@ -676,25 +813,26 @@ class ResourceAllocation {
                 request.status = "Fulfilled";
                 beneficiaries.add(new Beneficiary(request.itemRequested, request.quantity));
                 System.out.println("Pending request fulfilled: " + request);
-            } else if (item != null) {
+            } else if (item != null && item.quantity > 0) {
                 request.quantity -= item.quantity;
                 inventoryBST.updateQuantityOrRemove(request.itemRequested, -item.quantity);
-                remainingRequests.offer(request); // Add remaining quantity back to queue
-                System.out.println("Partially fulfilled request");
+                remainingRequests.offer(request);
+                System.out.println("Partially fulfilled request: " + request);
             } else {
-                remainingRequests.offer(request); // No stock available; keep it in queue
-               // System.out.println("Still pending, no stock available: " + request);
+                remainingRequests.offer(request);
             }
         }
+
         requestQueue = remainingRequests;
     }
+
 
     // List all pending requests by priority
     public void listPendingRequests() {
         if (requestQueue.isEmpty()) {
             System.out.println("No pending requests.");
         } else {
-            System.out.println("Pending Requests (by priority):");
+            System.out.println("Pending Requests :");
             requestQueue.forEach(System.out::println);
         }
     }
@@ -732,204 +870,246 @@ public class NGO {
         Scanner sc = new Scanner(System.in);
         InventoryBST inventoryBST = new InventoryBST();
         ResourceAllocation resourceAllocation = new ResourceAllocation(inventoryBST);
-        int Mainchoice=0;
-do{
-    System.out.println("\n1.Donations management\n2.Volunteers and Events management\n3.Requests and stock management\n0.exit");
-     Mainchoice=sc.nextInt();
-    sc.nextLine();
-    switch (Mainchoice){
-        case 0:
-            break;
-        case 1:
-            Donations donations = new Donations();
-            int choice1;
-            do {
-                System.out.println("\n--- Donation Management System ---");
-                System.out.println("1. Add Donation");
-                System.out.println("2. View All Donations");
-                System.out.println("3. Update Donation");
-                System.out.println("4. Sort Donations by Amount");
-                System.out.println("5. View Total Donation Amount");
-                System.out.println("0. back");
-                System.out.print("Enter your choice: ");
-                choice1 = sc.nextInt();
-                sc.nextLine(); // consume newline
-
-                switch (choice1) {
-                    case 1:
-                        donations.addDonation();
-                        break;
-                    case 2:
-                        donations.displayAllDonations();
-                        break;
-                    case 3:
-                        donations.updateDonation();
-                        break;
-                    case 4:
-                        donations.quickSortDonationsByAmount();
-                        donations.displayAllDonations(); // Display sorted donations
-                        break;
-                    case 5:
-                        double totalAmount = donations.totalDonationAmount();
-                        System.out.println("Total Donation Amount: RS." + totalAmount);
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-
-                }
-
-            }while(choice1!=0);
-            break;
-
-        case 2:
-            VolunteerQueue volunteerQueue = new VolunteerQueue();
-            EventList eventList = new EventList();
-            int choice2=0;
-            do {
-                System.out.println("\nMenu");
-                System.out.println("1. Volunteers");
-                System.out.println("2. Events");
-                System.out.println("0. back");
-                System.out.print("Enter your choice: ");
-                choice2 = sc.nextInt();
-
-                switch (choice2) {
-                    case 1:
-                        // Volunteers Menu
-                        while (true) {
-                            System.out.println("\nVolunteers Menu");
-                            System.out.println("1. Add new Volunteer");
-                            System.out.println("2. View All Volunteers");
-                            System.out.println("0. back");
-                            System.out.print("Enter your choice: ");
-                            int volunteerChoice = sc.nextInt();
-
-                            switch (volunteerChoice) {
-                                case 1:
-                                    volunteerQueue.addVolunteer();
-                                    break;
-                                case 2:
-                                    volunteerQueue.viewAllVolunteers();
-                                    break;
-                                case 0:
-                                    // Exit Volunteers Menu
-                                    break;
-                                default:
-                                    System.out.println("Invalid choice. Try again.");
-                            }
-                            if (volunteerChoice == 0) {
-                                break; // Exit loop to go back to Main Menu
-                            }
-                        }
-                        break;
-
-                    case 2:
-                        // Events Menu
-                        while (true) {
-                            System.out.println("\nEvents Menu");
-                            System.out.println("1. Add new Event");
-                            System.out.println("2. Display All Events");
-                            System.out.println("3. Search Event");
-                            System.out.println("4. Assign Volunteer to Event");
-                            System.out.println("5. Update Event Details");
-                            System.out.println("0. back");
-                            System.out.print("Enter your choice: ");
-                            int eventChoice = sc.nextInt();
-
-                            switch (eventChoice) {
-                                case 1:
-                                    eventList.createEvent();
-                                    break;
-                                case 2:
-                                    eventList.displayAllEvents();
-                                    break;
-                                case 3:
-                                    eventList.searchEvent();
-                                    break;
-                                case 4:
-                                    eventList.assignVolunteerToEvent(volunteerQueue);
-                                    break;
-                                case 5:
-                                    eventList.updateEventDetails();
-                                    break;
-                                case 0:
-                                    // Exit Events Menu
-                                    break;
-                                default:
-                                    System.out.println("Invalid choice. Try again.");
-                            }
-                            if (eventChoice == 0) {
-                                break; // Exit loop to go back to Main Menu
-                            }
-                        }
-                        break;
-
-                    case 3:
-                        // Exit the program
-                        System.exit(0);
-                        break;
-
-                    default:
-                        System.out.println("Invalid choice. Try again.");
-                }
-            }while(choice2!=0);
-            break;
-      /*  case 3:
-            int choice3=0;
-            do {
-                System.out.println("\nNGO Resource Allocation System");
-                System.out.println("1. Add requests ");
-                System.out.println("2. Add Stock Item");
-                System.out.println("3. List Pending Requests");
-                System.out.println("4. Display Stock Items");
-                System.out.println("5. List Beneficiaries");
-                System.out.println("0. back");
-                System.out.print("Enter your choice: ");
-                 choice3 = sc.nextInt();
-                sc.nextLine();
-
-                switch (choice3) {
-                    case 0:
-                       break;
-                    case 1:
-                        System.out.print("Enter Priority (from 1 to 10): ");
-                        int priority = sc.nextInt();
+        int FirstMainChoice = 0;
+        Donations donations = new Donations();
+        VolunteerQueue volunteerQueue = new VolunteerQueue();
+        EventList eventList = new EventList();
+        do {
+            System.out.println("\n1.User\n2.Admin\n0.exit\n");
+            FirstMainChoice = sc.nextInt();
+            sc.nextLine();
+            switch (FirstMainChoice) {
+                case 0:
+                    break;
+                case 1:
+                    int userChoice = 0;
+                    do {
+                        System.out.println("1.Donate money \n2.Register as Volunteer\n3.Request\n4.Donate stuff\n0.exit\n");
+                        userChoice = sc.nextInt();
                         sc.nextLine();
-                        System.out.print("Enter Item Name: ");
-                        String itemRequested = sc.nextLine();
-                        System.out.print("Enter Quantity: ");
-                        int quantity = sc.nextInt();
-                        resourceAllocation.addRequest(priority, itemRequested, quantity);
-                        break;
-                    case 2:
-                        System.out.print("Enter Item Name: ");
-                        String itemName = sc.nextLine();
-                        System.out.print("Enter Quantity to Add: ");
-                        int stockQuantity = sc.nextInt();
-                        resourceAllocation.addStock(itemName, stockQuantity);
-                        break;
-                    case 3:
-                        resourceAllocation.listPendingRequests();
-                        break;
-                    case 4:
-                        inventoryBST.displayInventory();
-                        break;
-                    case 5:
-                        resourceAllocation.listBeneficiaries();
-                        break;
-                    default:
-                        System.out.println("Invalid choice.");
-                }
-            }while (choice3!=0);
-            break;   
-        default:
-            System.out.println("Enter valid choice");
- */
+                        switch (userChoice) {
+                            case 0:
+                                break;
+                            case 1:
+                                donations.addDonation();
+                                break;
+                            case 2:
+                                volunteerQueue.addVolunteer();
+                                break;
+                            case 3:
+                                System.out.print("Enter Item Name: ");
+                                String itemRequested = sc.nextLine();
+                                System.out.print("Enter Quantity: ");
+                                int quantity = sc.nextInt();
+                                resourceAllocation.addRequest(itemRequested, quantity);
+                                break;
+                            case 4:
+                                System.out.print("Enter Item Name: ");
+                                String itemName = sc.nextLine();
+                                System.out.print("Enter Quantity to Add: ");
+                                int stockQuantity = sc.nextInt();
+                                resourceAllocation.addStock(itemName, stockQuantity);
+                                break;
+                            default:
+                                System.out.println("Please enter valid choice");
 
-    }
-}while(Mainchoice!=0);
 
-    }
-}
+                        }
+                    } while (userChoice != 0);
+                    break;
+                case 2:
+                    int AdminChoice = 0;
+                    do {
+                        System.out.println("1.Donation Management\n2.Add Events\n3.Inventory Management\n0.back");
+                        AdminChoice = sc.nextInt();
+                        switch (AdminChoice) {
+                            case 1:
+                                int dc = 0;
+                                do {
+                                    System.out.println();
+                                    System.out.println("1.add in donations");
+                                    System.out.println("2. View All Donations");
+                                    System.out.println("3. Update Donation");
+                                    System.out.println("4. Sort Donations by Amount");
+                                    System.out.println("5. View Total Donation Amount");
+                                    System.out.println("0. back");
+                                    System.out.print("Enter your choice: ");
+                                    dc = sc.nextInt();
+                                    switch (dc) {
+                                        case 1:
+                                            donations.addDonation();
+                                            break;
+                                        case 2:
+                                            donations.displayAllDonations();
+                                            break;
+                                        case 3:
+                                            donations.updateDonation();
+                                            break;
+                                        case 4:
+                                            donations.quickSortDonationsByAmount();
+                                            donations.displayAllDonations(); // Display sorted donations
+                                            break;
+                                        case 5:
+                                            double totalAmount = donations.totalDonationAmount();
+                                            System.out.println("Total Donation Amount: RS." + totalAmount);
+                                            break;
+                                        case 0:
+                                            break;
+                                        default:
+                                            System.out.println("Invalid choice. Please try again.");
+                                    }
+                                } while (dc != 0);
+                                break;
+                            case 2:
+
+                                int choice2 = 0;
+                                do {
+                                    System.out.println("\nMenu");
+                                    System.out.println("1. Volunteers");
+                                    System.out.println("2. Events");
+                                    System.out.println("0. back");
+                                    System.out.print("Enter your choice: ");
+                                    choice2 = sc.nextInt();
+
+                                    switch (choice2) {
+                                        case 1:
+                                            // Volunteers Menu
+                                            while (true) {
+                                                System.out.println("\nVolunteers Menu");
+                                                System.out.println("1. Add new Volunteer");
+                                                System.out.println("2. View All Volunteers");
+                                                System.out.println("0. back");
+                                                System.out.print("Enter your choice: ");
+                                                int volunteerChoice = sc.nextInt();
+
+                                                switch (volunteerChoice) {
+                                                    case 1:
+                                                        volunteerQueue.addVolunteer();
+                                                        break;
+                                                    case 2:
+                                                        volunteerQueue.viewAllVolunteers();
+                                                        break;
+                                                    case 0:
+                                                        // Exit Volunteers Menu
+                                                        break;
+                                                    default:
+                                                        System.out.println("Invalid choice. Try again.");
+                                                }
+                                                if (volunteerChoice == 0) {
+                                                    break; // Exit loop to go back to Main Menu
+                                                }
+                                            }
+                                            break;
+
+                                        case 2:
+                                            // Events Menu
+                                            while (true) {
+                                                System.out.println("\nEvents Menu");
+                                                System.out.println("1. Add new Event");
+                                                System.out.println("2. Display All Events");
+                                                System.out.println("3. Search Event");
+                                                System.out.println("4. Assign Volunteer to Event");
+                                                System.out.println("5. Update Event Details");
+                                                System.out.println("0. back");
+                                                System.out.print("Enter your choice: ");
+                                                int eventChoice = sc.nextInt();
+
+                                                switch (eventChoice) {
+                                                    case 1:
+                                                        eventList.createEvent();
+                                                        break;
+                                                    case 2:
+                                                        eventList.displayAllEvents();
+                                                        break;
+                                                    case 3:
+                                                        eventList.searchEvent();
+                                                        break;
+                                                    case 4:
+                                                        eventList.assignVolunteerToEvent(volunteerQueue);
+                                                        break;
+                                                    case 5:
+                                                        eventList.updateEventDetails();
+                                                        break;
+                                                    case 0:
+                                                        // Exit Events Menu
+                                                        break;
+                                                    default:
+                                                        System.out.println("Invalid choice. Try again.");
+                                                }
+                                                if (eventChoice == 0) {
+                                                    break; // Exit loop to go back to Main Menu
+                                                }
+                                            }
+                                            break;
+
+                                        case 3:
+                                            // Exit the program
+                                            System.exit(0);
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid choice. Try again.");
+                                    }
+                                } while (choice2 != 0);
+                                break;
+                            case 3:
+                                int choice3 = 0;
+                                do {
+                                    System.out.println("\nNGO Resource Allocation System");
+                                    System.out.println("1. Add requests ");
+                                    System.out.println("2. Add Stock Item");
+                                    System.out.println("3. List Pending Requests");
+                                    System.out.println("4. Display Stock Items");
+                                    System.out.println("5. List Beneficiaries");
+                                    System.out.println("0. back");
+                                    System.out.print("Enter your choice: ");
+                                    choice3 = sc.nextInt();
+                                    sc.nextLine();
+
+                                    switch (choice3) {
+                                        case 0:
+                                            break;
+                                        case 1:
+
+
+                                            System.out.print("Enter Item Name: ");
+                                            String itemRequested = sc.nextLine();
+                                            System.out.print("Enter Quantity: ");
+                                            int quantity = sc.nextInt();
+                                            resourceAllocation.addRequest(itemRequested, quantity);
+                                            break;
+                                        case 2:
+                                            System.out.print("Enter Item Name: ");
+                                            String itemName = sc.nextLine();
+                                            System.out.print("Enter Quantity to Add: ");
+                                            int stockQuantity = sc.nextInt();
+                                            resourceAllocation.addStock(itemName, stockQuantity);
+                                            break;
+                                        case 3:
+                                            resourceAllocation.listPendingRequests();
+                                            break;
+                                        case 4:
+                                            inventoryBST.displayInventory();
+                                            break;
+                                        case 5:
+                                            resourceAllocation.listBeneficiaries();
+                                            break;
+                                        default:
+                                            System.out.println("Invalid choice.");
+                                    }
+                                } while (choice3 != 0);
+                                break;
+                            default:
+                                System.out.println("Enter valid choice");
+
+                        }
+                    } while (AdminChoice != 0);
+
+            }
+        } while (FirstMainChoice != 0);
+
+
+
+
+
+
